@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import BoxAnimation from './BoxAnimation'
+import BoxAnimation from './src/BoxAnimation'
 import { ImageBackground } from 'react-native'
-import ScrollAnimation from './ScrollAnimation'
-import SlotAnimation from './SlotAnimation'
-import ProgressLoader from './ProgressLoader.vue'
+import ScrollAnimation from './src/ScrollAnimation'
+import SlotAnimation from './src/SlotAnimation'
+import ProgressLoader from './src/ProgressLoader.vue'
 
 export default {
   components:{
