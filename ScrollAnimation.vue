@@ -6,10 +6,10 @@
         :style="{
           position: 'absolute',
           zIndex: 1,
-          height: animatedSize,
-          width: animatedSize,
-          borderRadius: animatedSize,
-          left: imagePosition,
+          height: $options.animatedSize,
+          width: $options.animatedSize,
+          borderRadius: $options.animatedSize,
+          left: $options.imagePosition,
           top: 50,
         }"
       />
@@ -18,7 +18,7 @@
           backgroundColor: 'rgb(0, 143, 90)',
           flexDirection: 'row',
           width: '100%',
-          height: headerHeight,
+          height: $options.headerHeight,
         }"
       >
       </animated:view>
@@ -29,7 +29,7 @@
             {
               nativeEvent: {
                 contentOffset: {
-                  y: scrollY,
+                  y: $options.scrollY,
                 },
               },
             },
@@ -114,31 +114,26 @@ export default {
     return {
       Animated,
       lake,
-      animatedSize:null,
-      imagePosition:null,
-      headerHeight:null,
-      scrollY:new Animated.Value(0)
     }
   },
+  scrollY:new Animated.Value(0),
   created () {
-    this.animatedSize = this.scrollY.interpolate({
+    this.$options.animatedSize = this.$options.scrollY.interpolate({
       inputRange:[0,100],
       outputRange:[200,100],
       extrapolate:'clamp'
     })
-    this.imagePosition = this.scrollY.interpolate({
+    this.$options.imagePosition = this.$options.scrollY.interpolate({
       inputRange:[0,100],
       outputRange:[100,20],
       extrapolate:'clamp'
     })
-    this.headerHeight = this.scrollY.interpolate({
+    this.$options.headerHeight = this.$options.scrollY.interpolate({
       inputRange:[0,100],
       outputRange:[300,100],
       extrapolate:'clamp'
     })
   },
-  computed:{
-  }
 }
 </script>
 

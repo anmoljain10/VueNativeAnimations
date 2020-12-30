@@ -1,24 +1,24 @@
 <template>
   <view class="container">
     <view class="box" :style="{transform: [{rotate: '45deg'}]}">
-      <view :style="{flexDirection: 'row'}">
+      <view class="flex-row">
         <animated:view
           class="small-box"
-          :style="{margin: marginInterpolation}"
+          :style="{margin: $options.marginInterpolation}"
         />
         <animated:view
           class="small-box"
-          :style="{margin: marginInterpolation}"
+          :style="{margin: $options.marginInterpolation}"
         />
       </view>
-      <view :style="{flexDirection: 'row'}">
+      <view class="flex-row">
         <animated:view
           class="small-box"
-          :style="{margin: marginInterpolation}"
+          :style="{margin: $options.marginInterpolation}"
         />
         <animated:view
           class="small-box"
-          :style="{margin: marginInterpolation}"
+          :style="{margin: $options.marginInterpolation}"
         />
       </view>
     </view>
@@ -29,37 +29,34 @@
 import { Animated } from 'react-native'
 
 export default {
-    data () {
-        return {
-          animateMargin:null
-        }
-    },
+    animateMargin:new Animated.Value(0),
     created () {
-      this.animateMargin = new Animated.Value(0)
-      this.marginInterpolation = this.animateMargin.interpolate({
+      this.$options.marginInterpolation = this.$options.animateMargin.interpolate({
         inputRange:[0,0.5,1],
         outputRange:[0,10,0]
       })
     },
     methods:{
       startAnimation () {
-        Animated.timing(this.animateMargin,{
+        Animated.timing(this.$options.animateMargin,{
           toValue:1,
           duration:1000,
           useNativeDriver:false
         }).start(()=>{
-          this.animateMargin.setValue(0)
+          this.$options.animateMargin.setValue(0)
           this.startAnimation()})
       }
     },
     mounted () {
-        console.log('mounted')
       this.startAnimation() 
     }
 }
 </script>
 
 <style scoped>
+.flex-row {
+  flex-direction: row;
+}
 .container {
   flex: 1;
   background-color: rgb(201, 76, 77);
